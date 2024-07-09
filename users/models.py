@@ -12,7 +12,7 @@ class User(AbstractUser):
     )
     first_name = models.CharField(max_length=50, verbose_name="Имя", blank=True, null=True,
                                   help_text="Напишите Ваше имя")
-    second_name = models.CharField(max_length=50, verbose_name="Имя", blank=True, null=True,
+    second_name = models.CharField(max_length=50, verbose_name="Фамилия", blank=True, null=True,
                                   help_text="Напишите Вашу фамилию")
 
     # Выбираем полем для авторизации email
