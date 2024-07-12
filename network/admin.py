@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from network.models import Product, NetworkObject
+from network.models import NetworkObject, Product
 
 
 @admin.register(Product)
@@ -20,6 +20,15 @@ class NetworkObjectAdmin(admin.ModelAdmin):
     Класс для регистрации модели NetworkObject в админке.
     """
 
-    list_display = ("id", "name", "email", "country", "town", "provider", "debt_to_provider", "time_of_creation")
+    list_display = (
+        "id",
+        "name",
+        "email",
+        "country",
+        "town",
+        "provider",
+        "debt_to_provider",
+        "time_of_creation",
+    )
     list_filter = ("name",)
     search_fields = ("name", "country")

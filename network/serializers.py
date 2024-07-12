@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from network.models import Product, NetworkObject
+from network.models import NetworkObject, Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
