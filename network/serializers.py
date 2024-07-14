@@ -31,6 +31,7 @@ class NetworkObjectDetailSerializer(serializers.ModelSerializer):
     # Задаем новое поле для модели, которое будет передаваться через Serializer
     count_products_for_networkobject = serializers.SerializerMethodField()
     products = ProductSerializer(many=True, read_only=True)
+    url_provider = serializers.SerializerMethodField()
 
     @staticmethod
     def get_count_products_for_networkobject(networkobject):
@@ -40,9 +41,11 @@ class NetworkObjectDetailSerializer(serializers.ModelSerializer):
 
         return networkobject.products.count()
 
-    # url_provider = serializers.HyperlinkedIdentityField(view_name='networkobjects-detail', read_only=True)
-    # url = serializers.HyperlinkedIdentityField('network:networkobjects-detail',
-    #                                            read_only=True)
+    @staticmethod
+    def get_url_provider(networkobject):
+        provider = networkobject.provider
+        url_provider = f"http://127.0.0.1:8000/network/networkobjects/{provider.pk}/"
+        return url_provider
 
     class Meta:
         model = NetworkObject
