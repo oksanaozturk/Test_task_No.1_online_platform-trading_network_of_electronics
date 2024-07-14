@@ -32,6 +32,7 @@ class NetworkObjectDetailSerializer(serializers.ModelSerializer):
     count_products_for_networkobject = serializers.SerializerMethodField()
     products = ProductSerializer(many=True, read_only=True)
     url_provider = serializers.SerializerMethodField()
+    hierarchy = serializers.SerializerMethodField()
 
     @staticmethod
     def get_count_products_for_networkobject(networkobject):
@@ -43,9 +44,24 @@ class NetworkObjectDetailSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_url_provider(networkobject):
+        """
+        Метод для получения ссылки на страницу Поставщика.
+        :param networkobject:
+        :return: url_provider
+        """
         provider = networkobject.provider
         url_provider = f"http://127.0.0.1:8000/network/networkobjects/{provider.pk}/"
         return url_provider
+
+    @staticmethod
+    def get_hierarchy(networkobject):
+        if "Завод" in networkobject.name:
+            hierarchy = 0
+        elif networkobject.pk == networkobject.provider.pk:
+            hierarchy = 0
+        else:
+            hierarchy = 1
+        return hierarchy
 
     class Meta:
         model = NetworkObject
