@@ -1,6 +1,6 @@
-from network.models import NetworkObject, Product
-
 from django.contrib import admin
+
+from network.models import NetworkObject, Product
 
 
 @admin.action(description="Can clear debt to provider")

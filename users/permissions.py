@@ -3,7 +3,7 @@ from rest_framework import permissions
 
 class IsActiveAndIsStaff(permissions.BasePermission):
     """
-   Класс для проверки является ли Пользователь Активным (is_active) Сотрудником (is_staff)
+    Класс для проверки является ли Пользователь Активным (is_active) Сотрудником (is_staff)
     """
 
     message = "Вы не являетесь активным сотрудником или данное поле нельзя изменить"

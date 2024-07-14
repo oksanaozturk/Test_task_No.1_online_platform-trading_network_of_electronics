@@ -81,7 +81,8 @@ class NetworkObject(models.Model):
         verbose_name="Поставщик",
         on_delete=models.CASCADE,
         help_text="Укажите поставщика",
-        blank=True, null=True
+        blank=True,
+        null=True,
     )
     debt_to_provider = models.DecimalField(
         max_digits=10,
@@ -91,9 +92,7 @@ class NetworkObject(models.Model):
         blank=True,
         null=True,
     )
-    time_of_creation = models.DateField(
-        auto_now_add=True, verbose_name="Дата создания"
-    )
+    time_of_creation = models.DateField(auto_now_add=True, verbose_name="Дата создания")
 
     class Meta:
         ordering = ["town"]
