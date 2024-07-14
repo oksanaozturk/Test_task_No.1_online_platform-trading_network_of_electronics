@@ -73,7 +73,6 @@ class NetworkObject(models.Model):
     products = models.ManyToManyField(
         Product,
         blank=True,
-        null=True,
     )
 
     provider = models.ForeignKey(
