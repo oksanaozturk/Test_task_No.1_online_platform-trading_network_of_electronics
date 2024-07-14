@@ -18,14 +18,12 @@ class Product(models.Model):
         blank=True,
         null=True,
     )
+    # Можно для фиксации даты применить default=datetime.now
     launch_date = models.DateField(
         auto_now_add=True,
         verbose_name="Дата выхода продукта на рынок",
         help_text="Введите дату выхода продукта на рынок",
     )
-
-    # provider = models.ForeignKey("NetworkObject", verbose_name="Поставщик", related_name="products",
-    #     on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = "Продукт"
@@ -72,12 +70,10 @@ class NetworkObject(models.Model):
     house = models.PositiveIntegerField(
         verbose_name="Номер дома", help_text="Введите номер дома", blank=True, null=True
     )
-    products = models.ForeignKey(
+    products = models.ManyToManyField(
         Product,
-        verbose_name="Продукты",
         blank=True,
         null=True,
-        on_delete=models.CASCADE,
     )
 
     provider = models.ForeignKey(
@@ -85,6 +81,7 @@ class NetworkObject(models.Model):
         verbose_name="Поставщик",
         on_delete=models.CASCADE,
         help_text="Укажите поставщика",
+        blank=True, null=True
     )
     debt_to_provider = models.DecimalField(
         max_digits=10,
@@ -94,13 +91,17 @@ class NetworkObject(models.Model):
         blank=True,
         null=True,
     )
-    time_of_creation = models.DateTimeField(
+    time_of_creation = models.DateField(
         auto_now_add=True, verbose_name="Дата создания"
     )
 
     class Meta:
+        ordering = ["town"]
         verbose_name = "Объект сети"
         verbose_name_plural = "Объекты сети"
+        permissions = [
+            ("delete_debt_to_provider", "Can delete debt_to_provider"),
+        ]
 
     def __str__(self):
         return self.name
