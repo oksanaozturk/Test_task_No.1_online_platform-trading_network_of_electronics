@@ -99,9 +99,6 @@ class NetworkObject(models.Model):
         ordering = ["town"]
         verbose_name = "Объект сети"
         verbose_name_plural = "Объекты сети"
-        permissions = [
-            ("delete_debt_to_provider", "Can delete debt_to_provider"),
-        ]
 
     def __str__(self):
         return self.name
