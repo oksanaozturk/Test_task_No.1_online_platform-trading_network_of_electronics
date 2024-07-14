@@ -30,5 +30,5 @@ class NetworkObjectAdmin(admin.ModelAdmin):
         "debt_to_provider",
         "time_of_creation",
     )
-    list_filter = ("name",)
+    list_filter = ("name", "town")
     search_fields = ("name", "country")
