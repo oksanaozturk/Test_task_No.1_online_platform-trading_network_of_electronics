@@ -1,5 +1,3 @@
-from django.contrib import admin
-
 from network.models import NetworkObject, Product
 
 from django.contrib import admin
@@ -7,6 +5,13 @@ from django.contrib import admin
 
 @admin.action(description="Can clear debt to provider")
 def clear_debt_to_provider(modeladmin, request, queryset):
+    """
+    Функция admin action, очищающий задолженность перед поставщиком у выбранных объектов.
+    :param modeladmin:
+    :param request:
+    :param queryset:
+    :return:
+    """
     queryset.update(debt_to_provider=0.00)
 
 
