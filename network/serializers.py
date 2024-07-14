@@ -20,7 +20,7 @@ class NetworkObjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NetworkObject
-        fields = "__all__"
+        exclude = ("products",)
 
 
 class NetworkObjectDetailSerializer(serializers.ModelSerializer):
@@ -28,11 +28,8 @@ class NetworkObjectDetailSerializer(serializers.ModelSerializer):
     Класс сериализатора для модели Course (вывод детальной информации по одному объекту).
     """
 
-    # Задаем новое поле для модели. которое будет передаваться через Serializer
+    # Задаем новое поле для модели, которое будет передаваться через Serializer
     count_products_for_networkobject = serializers.SerializerMethodField()
-    # product_name = serializers.CharField(source="product.name", read_only=True)
-    # product_model = serializers.CharField(source="product.model", read_only=True)
-    # product_launch_date = serializers.CharField(source="product.launch_date", read_only=True)
     products = ProductSerializer(many=True, read_only=True)
 
     @staticmethod
@@ -42,6 +39,10 @@ class NetworkObjectDetailSerializer(serializers.ModelSerializer):
         """
 
         return networkobject.products.count()
+
+    # url_provider = serializers.HyperlinkedIdentityField(view_name='networkobjects-detail', read_only=True)
+    # url = serializers.HyperlinkedIdentityField('network:networkobjects-detail',
+    #                                            read_only=True)
 
     class Meta:
         model = NetworkObject
